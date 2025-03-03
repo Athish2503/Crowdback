@@ -7,6 +7,8 @@ import Dashboard from "./Components/Dashboard";
 import AuthoritiesDashboard from "./Components/AuthoritiesDashboard";
 import ReportIssue from "./Components/ReportIssue";
 import Welcome from "./Components/Welcome";
+import UserHome from "./Components/Publics/UserHome";
+
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,6 +19,7 @@ const App = () => {
     if (token) {
       setIsAuthenticated(true);
     }
+
     const authoritiesToken = localStorage.getItem("authoritiesToken");
     if (authoritiesToken) {
       setIsAuthoritiesAuthenticated(true);
@@ -33,6 +36,8 @@ const App = () => {
         <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
         <Route path="/authorities-dashboard" element={isAuthoritiesAuthenticated ? <AuthoritiesDashboard /> : <Navigate to="/" />} />
         <Route path="/report-issue" element={isAuthenticated ? <ReportIssue /> : <Navigate to="/" />} />
+        {/* <Route path="/user-home" element={isAuthenticated ? <UserHome /> : <Navigate to="/" />} /> */}
+        <Route path="/user-home" element={<UserHome />} />
       </Routes>
     </Router>
   );
