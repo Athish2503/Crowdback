@@ -1,9 +1,19 @@
-import { useState } from "react"
-import { Container, Row, Col, Card, Button } from "react-bootstrap"
-import { BusFront, Users, MessageSquare, BarChart3, ArrowRight } from "lucide-react"
+import { useState } from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { BusFront, Users, MessageSquare, BarChart3, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Welcome() {
-  const [hoveredButton, setHoveredButton] = useState(null)
+  const [hoveredButton, setHoveredButton] = useState(null);
+  const navigate = useNavigate();
+
+  const handleUserLoginClick = () => {
+    navigate("/login");
+  };
+
+  const handleAuthoritiesLoginClick = () => {
+    navigate("/authorities-login");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
@@ -36,11 +46,12 @@ function Welcome() {
                 <Button
                   variant="light"
                   className="w-100 h-100 p-8 d-flex flex-column align-items-center justify-content-center gap-4 border-0 rounded-0"
+                  onClick={handleAuthoritiesLoginClick}
                 >
                   <div className="bg-blue-100 p-4 rounded-full">
                     <BarChart3 className="h-8 w-8 text-blue-600" />
                   </div>
-                  <div className="text-xl font-semibold">Authorities</div>
+                  <div className="text-xl font-semibold">Officials Login</div>
                   <div className="text-sm text-gray-500">Manage and respond to feedback</div>
                   <ArrowRight
                     className={`h-5 w-5 mt-2 transition-all duration-300 ${
@@ -64,12 +75,12 @@ function Welcome() {
                 <Button
                   variant="light"
                   className="w-100 h-100 p-8 d-flex flex-column align-items-center justify-content-center gap-4 border-0 rounded-0"
+                  onClick={handleUserLoginClick}
                 >
-                    
                   <div className="bg-blue-100 p-4 rounded-full">
                     <Users className="h-8 w-8 text-blue-600" />
                   </div>
-                  <div className="text-xl font-semibold">User Registration</div>
+                  <div className="text-xl font-semibold">Public Login</div>
                   <div className="text-sm text-gray-500">Submit feedback and suggestions</div>
                   <ArrowRight
                     className={`h-5 w-5 mt-2 transition-all duration-300 ${
@@ -129,7 +140,7 @@ function Welcome() {
         </div>
       </Container>
     </div>
-  )
+  );
 }
 
-export default Welcome
+export default Welcome;
