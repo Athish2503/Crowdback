@@ -4,6 +4,7 @@ import Login from "./Components/Authentication/LoginPage";
 import Register from "./Components/Authentication/Register";
 import Dashboard from "./Components/Dashboard";
 import ReportIssue from "./Components/ReportIssue";
+import Welcome from "./Components/Welcome";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,7 +20,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register setIsFlipped={setIsFlipped} />} />
+        <Route path="/" element={<Welcome />} />
         <Route path="/register" element={<Register setIsFlipped={setIsFlipped} />} />
         <Route path="/login" element={<Login setIsFlipped={setIsFlipped} />} />
         <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
