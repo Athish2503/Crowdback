@@ -47,6 +47,10 @@ exports.sendEmail = async (req, res) => {
   try {
     const { email, subject, message } = req.body;
 
+    console.log("Sending email to:", email);
+    console.log("Email subject:", subject);
+    console.log("Email message:", message);
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -64,12 +68,15 @@ exports.sendEmail = async (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
+        console.error("Error sending email:", error);
         return res.status(400).json({ message: error.message });
       } else {
+        console.log("Email sent:", info.response);
         res.status(200).json({ message: 'Email sent: ' + info.response });
       }
     });
   } catch (error) {
+    console.error("Error in sendEmail controller:", error);
     res.status(400).json({ message: error.message });
   }
 };

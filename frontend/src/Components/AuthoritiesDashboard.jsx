@@ -27,17 +27,26 @@ function AuthoritiesDashboard() {
   useEffect(() => {
     const fetchFeedback = async () => {
       try {
-        console.log("Fetching feedback data...");
-        const response = await axios.get("http://localhost:5000/api/get-feedback");
-        console.log("Fetched feedback data:", response.data);
+        const token = localStorage.getItem("authoritiesToken");
+        const response = await axios.get("http://localhost:5000/api/get-feedback", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setFeedbackData(response.data);
       } catch (error) {
         console.error("Error fetching feedback:", error);
       }
-    };
+    };    
 
     fetchFeedback();
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("authoritiesToken");
+    if (!token) {
+      navigate("/");
+    }
+  }, []);
+  
 
   const handleLogout = () => {
     localStorage.removeItem("authoritiesToken");
@@ -61,13 +70,17 @@ function AuthoritiesDashboard() {
 
   const handleSendEmail = async () => {
     try {
-      await axios.post("http://localhost:5000/api/send-email", emailData);
+      console.log("Sending email with data:", emailData);
+      const response = await axios.post("http://localhost:5000/api/send-email", emailData);
+      console.log("Email response:", response.data);
       toast.success("Email sent successfully!");
       setShowEmailModal(false);
     } catch (error) {
+      console.error("Error sending email:", error.response ? error.response.data : error.message);
       toast.error("Failed to send email. Please try again.");
     }
   };
+  
 
   const openEmailModal = (email) => {
     setEmailData({ ...emailData, email });
