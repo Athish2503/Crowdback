@@ -14,6 +14,7 @@ export default function ReportIssue() {
     description: "",
     mode: "",
     reporter: "",
+    type: "suggestion", // Default value
   });
   const navigate = useNavigate();
 
@@ -83,6 +84,20 @@ export default function ReportIssue() {
                   name="image"
                   onChange={handleChange}
                 />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Type</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="type"
+                  value={formData.type}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="suggestion">Suggestion</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="issue">Issue</option>
+                </Form.Control>
               </Form.Group>
 
               <Form.Group className="mb-3">

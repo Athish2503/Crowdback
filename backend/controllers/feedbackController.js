@@ -3,7 +3,7 @@ const Feedback = require('../models/feedback');
 
 exports.createFeedback = async (req, res) => {
     try {
-      const { title, location, description, mode, reporter } = req.body;
+      const { title, location, description, mode, reporter, type } = req.body;
       const image = req.file ? `/uploads/${req.file.filename}` : '/placeholder.svg?height=200&width=400';
   
       const feedback = new Feedback({
@@ -13,6 +13,7 @@ exports.createFeedback = async (req, res) => {
         description,
         mode,
         reporter,
+        type,
       });
   
       await feedback.save();

@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../Publics/Sidebar";
+import "./UserHome.css";
 
 export default function UserHome() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -57,12 +58,15 @@ export default function UserHome() {
           {filteredFeedback.map((feedback) => (
             <div key={feedback._id} className="col-md-4 mb-4">
               <Card className="shadow-sm">
-                <Image src={`http://localhost:5000${feedback.image}`} alt={feedback.title} fluid className="card-img-top" />
+                <Image src={`http://localhost:5000${feedback.image}`} alt={feedback.title} fluid className="card-img-top fixed-img" />
                 <Card.Body>
                   <Card.Title>{feedback.title}</Card.Title>
                   <Card.Subtitle className="text-muted small mb-2">{new Date(feedback.date).toLocaleDateString()}</Card.Subtitle>
                   <Card.Text>
                     <strong>Location:</strong> {feedback.location}
+                  </Card.Text>
+                  <Card.Text>
+                    <strong>Type:</strong> {feedback.type}
                   </Card.Text>
                   <Card.Text>{feedback.description}</Card.Text>
                 </Card.Body>
@@ -80,4 +84,4 @@ export default function UserHome() {
       <ToastContainer />
     </div>
   );
-} 
+}

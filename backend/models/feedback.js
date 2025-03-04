@@ -29,6 +29,11 @@ const feedbackSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    enum: ['suggestion', 'feedback', 'issue'],
+    required: true,
+  }
 });
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);
