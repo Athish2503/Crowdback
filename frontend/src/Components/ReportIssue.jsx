@@ -14,7 +14,8 @@ export default function ReportIssue() {
     description: "",
     mode: "",
     reporter: "",
-    type: "suggestion", // Default value
+    type: "suggestion", 
+    email: "" // Default value
   });
   const navigate = useNavigate();
 
@@ -143,6 +144,17 @@ export default function ReportIssue() {
                   name="reporter"
                   placeholder="Enter your name"
                   value={formData.reporter}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Reporter Email</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
                 />

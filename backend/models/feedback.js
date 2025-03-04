@@ -33,7 +33,16 @@ const feedbackSchema = new mongoose.Schema({
     type: String,
     enum: ['suggestion', 'feedback', 'issue'],
     required: true,
-  }
+  },
+  status: {
+    type: String,
+    enum: ['New', 'In Progress', 'Urgent'],
+    default: 'New',
+  },
+  email: {
+    type: String,
+    required: true,
+  },
 });
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);
