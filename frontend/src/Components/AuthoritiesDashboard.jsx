@@ -1,6 +1,5 @@
-
-import { useState } from "react"
-import { Row, Col, Card, Button, Nav, Table, Badge, ProgressBar } from "react-bootstrap"
+import { useState } from "react";
+import { Row, Col, Card, Button, Nav, Table, Badge } from "react-bootstrap";
 import {
   BarChart3,
   MessageSquare,
@@ -12,22 +11,34 @@ import {
   AlertCircle,
   CheckCircle,
   Clock3,
-} from "lucide-react"
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AuthoritiesDashboard() {
-  const [activeTab, setActiveTab] = useState("overview")
+  const [activeTab, setActiveTab] = useState("overview");
+  const navigate = useNavigate();
 
   // Sample data for demonstration
   const recentFeedback = [
     { id: 1, type: "Issue", status: "Urgent", message: "Bus delay on Route 42", time: "5m ago" },
     { id: 2, type: "Suggestion", status: "New", message: "Add more buses during peak hours", time: "15m ago" },
     { id: 3, type: "Complaint", status: "In Progress", message: "AC not working in bus #123", time: "1h ago" },
-  ]
+  ];
+
+  const handleLogout = () => {
+    localStorage.removeItem("authoritiesToken");
+    toast.success("Logged out successfully!");
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-lg fixed h-full">
+      <div className="w-full lg:w-64 bg-white shadow-lg fixed lg:relative h-full lg:h-auto">
         <div className="p-4 border-b">
           <h2 className="text-xl font-bold text-gray-800">Authority Dashboard</h2>
         </div>
@@ -60,14 +71,14 @@ function AuthoritiesDashboard() {
           <Nav.Link className="mb-3 flex items-center gap-2 text-gray-600">
             <Settings size={20} /> Settings
           </Nav.Link>
-          <Nav.Link className="mb-3 flex items-center gap-2 text-gray-600">
+          <Nav.Link className="mb-3 flex items-center gap-2 text-gray-600" onClick={handleLogout}>
             <LogOut size={20} /> Logout
           </Nav.Link>
         </Nav>
       </div>
 
       {/* Main Content */}
-      <div className="ml-64 flex-1 p-8">
+      <div className="flex-1 p-8 ml-0 lg:ml-64">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-bold text-gray-800">Dashboard Overview</h1>
@@ -81,7 +92,7 @@ function AuthoritiesDashboard() {
 
         {/* Stats Cards */}
         <Row className="mb-8">
-          <Col md={4}>
+          <Col md={4} className="mb-4 md:mb-0">
             <Card className="h-100">
               <Card.Body>
                 <div className="flex items-center justify-between mb-4">
@@ -93,7 +104,7 @@ function AuthoritiesDashboard() {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
+          <Col md={4} className="mb-4 md:mb-0">
             <Card className="h-100">
               <Card.Body>
                 <div className="flex items-center justify-between mb-4">
@@ -125,7 +136,7 @@ function AuthoritiesDashboard() {
             <h3 className="text-xl font-semibold text-gray-800">Recent Feedback</h3>
           </Card.Header>
           <Card.Body>
-            <Table hover>
+            <Table hover responsive>
               <thead>
                 <tr>
                   <th>Type</th>
@@ -171,16 +182,15 @@ function AuthoritiesDashboard() {
           </Card.Body>
         </Card>
 
-        {/* System Performance */}
+        {/* Quick Actions */}
         <Row>
-          
           <Col md={6}>
             <Card>
               <Card.Header className="bg-white">
                 <h3 className="text-xl font-semibold text-gray-800">Quick Actions</h3>
               </Card.Header>
               <Card.Body>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Button variant="outline-primary" className="flex items-center gap-2 justify-center">
                     <MessageSquare size={20} />
                     View All Feedback
@@ -203,9 +213,9 @@ function AuthoritiesDashboard() {
           </Col>
         </Row>
       </div>
+      <ToastContainer />
     </div>
-  )
+  );
 }
 
-export default AuthoritiesDashboard
-
+export default AuthoritiesDashboard;

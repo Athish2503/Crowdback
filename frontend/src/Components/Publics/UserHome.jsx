@@ -1,38 +1,29 @@
-import { useState } from "react";
-import { Card, Button, Badge, Image } from "react-bootstrap";
-import { House, PlusCircle, Ticket, BoxArrowRight } from "react-bootstrap-icons";
+import { useState, useEffect } from "react";
+import { Card, Badge, Image, Button } from "react-bootstrap"; // Ensure Button is imported
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
-
-const feedbackData = [
-  {
-    id: 1,
-    title: "Broken seat on bus #42",
-    image: "/placeholder.svg?height=200&width=400",
-    date: "2025-03-01",
-    location: "Main Street & 5th Avenue",
-    description: "The third seat from the front on the right side is broken and poses a safety hazard.",
-    mode: "Bus",
-    reporter: "John Doe",
-    reporterAvatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: 2,
-    title: "Delayed subway service",
-    image: "/placeholder.svg?height=200&width=400",
-    date: "2025-03-02",
-    location: "Central Station",
-    description: "The Blue Line has been consistently delayed by 15-20 minutes during morning rush hour.",
-    mode: "Subway",
-    reporter: "Jane Smith",
-    reporterAvatar: "/placeholder.svg?height=40&width=40",
-  },
-];
+import Sidebar from "../Publics/Sidebar";
 
 export default function UserHome() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [feedbackData, setFeedbackData] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchFeedback = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/get-feedback");
+        console.log("Fetched feedback data:", response.data); // Debugging log
+        setFeedbackData(response.data);
+      } catch (error) {
+        console.error("Error fetching feedback:", error);
+      }
+    };
+
+    fetchFeedback();
+  }, []);
 
   const filteredFeedback =
     activeFilter === "All" ? feedbackData : feedbackData.filter((item) => item.mode === activeFilter);
@@ -47,33 +38,9 @@ export default function UserHome() {
 
   return (
     <div className="d-flex min-vh-100 bg-light">
-      {/* Sidebar */}
-      <div className="bg-white border-end p-3 d-flex flex-column justify-content-between" style={{ width: "250px" }}>
-        <div>
-          <h2 className="fs-5 fw-bold mb-4">CrowdBack</h2>
-          <div className="nav flex-column">
-            <Button variant="light" className="text-start w-100 mb-2">
-              <House className="me-2" /> Dashboard
-            </Button>
-            <Button variant="light" className="text-start w-100 mb-2">
-              <PlusCircle className="me-2" /> Report Issue
-            </Button>
-            <Button variant="light" className="text-start w-100 mb-2">
-              <Ticket className="me-2" /> My Ticket Status
-            </Button>
-          </div>
-        </div>
-        <div className="border-top pt-3 mt-3">
-          <Button variant="light" className="text-start w-100" onClick={handleLogout}>
-            <BoxArrowRight className="me-2" /> Logout
-          </Button>
-        </div>
-      </div>
-
-      {/* Main Content */}
+      <Sidebar handleLogout={handleLogout} /> {/* Use the Sidebar component */}
       <div className="flex-grow-1 p-4">
         <h1 className="fs-4 fw-bold mb-4">Transportation Feedback</h1>
-        {/* Filter Buttons */}
         <div className="mb-3">
           {["All", "Bus", "Subway", "Train"].map((filter) => (
             <Button
@@ -86,16 +53,14 @@ export default function UserHome() {
             </Button>
           ))}
         </div>
-
-        {/* Feedback Cards */}
         <div className="row">
           {filteredFeedback.map((feedback) => (
-            <div key={feedback.id} className="col-md-4 mb-4">
+            <div key={feedback._id} className="col-md-4 mb-4">
               <Card className="shadow-sm">
-                <Image src={feedback.image || "/placeholder.svg"} alt={feedback.title} fluid className="card-img-top" />
+                <Image src={`http://localhost:5000${feedback.image}`} alt={feedback.title} fluid className="card-img-top" />
                 <Card.Body>
                   <Card.Title>{feedback.title}</Card.Title>
-                  <Card.Subtitle className="text-muted small mb-2">{feedback.date}</Card.Subtitle>
+                  <Card.Subtitle className="text-muted small mb-2">{new Date(feedback.date).toLocaleDateString()}</Card.Subtitle>
                   <Card.Text>
                     <strong>Location:</strong> {feedback.location}
                   </Card.Text>
@@ -105,7 +70,6 @@ export default function UserHome() {
                   <Badge bg="secondary">{feedback.mode}</Badge>
                   <div className="d-flex align-items-center">
                     <span className="me-2">{feedback.reporter}</span>
-                    <Image src={feedback.reporterAvatar} roundedCircle width={30} height={30} />
                   </div>
                 </Card.Footer>
               </Card>
@@ -116,4 +80,4 @@ export default function UserHome() {
       <ToastContainer />
     </div>
   );
-}
+} 

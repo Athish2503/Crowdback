@@ -18,7 +18,7 @@ const AuthoritiesLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/auth/authorities-login", {
+      const response = await axios.post("http://localhost:5000/api/authorities-login", {
         email: formData.email,
         password: formData.password,
       });

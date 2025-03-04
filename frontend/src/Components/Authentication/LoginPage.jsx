@@ -18,14 +18,14 @@ const LoginPage = ({ setIsFlipped }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/auth/login", {
+      const response = await axios.post("http://localhost:5000/api/login", {
         email: formData.email,
         password: formData.password,
       });
       localStorage.setItem("token", response.data.token);
       toast.success("Login successful!");
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/user-home");
       }, 2000);
     } catch (err) {
       setError("Login failed. Please try again.");

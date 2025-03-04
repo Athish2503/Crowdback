@@ -21,7 +21,7 @@ const Register = ({ setIsFlipped }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/auth/register", {
+      await axios.post("http://localhost:5000/api/register", {
         name: formData.fullName,
         email: formData.email,
         password: formData.password,
