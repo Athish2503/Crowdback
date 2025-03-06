@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -6,6 +7,7 @@ const path = require("path");
 const authRoutes = require("./routes/auth");
 const authoritiesRoutes = require("./routes/authorityroutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
+const userRoutes = require("./routes/userroutes");
 
 dotenv.config();
 const app = express();
@@ -24,6 +26,7 @@ app.get("/api", (req, res) => res.send("API is running"));
 app.use("/api", authRoutes);
 app.use("/api", authoritiesRoutes);
 app.use('/api', feedbackRoutes);
+app.use('/api', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,0 +1,31 @@
+.feedback-management {
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .feedback-management .card {
+    margin-bottom: 20px;
+  }
+  
+  .feedback-management .table {
+    margin-bottom: 0;
+  }
+  
+  .feedback-management .modal-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .feedback-management .modal-body {
+    padding: 20px;
+  }
+  
+  .feedback-management .modal-footer {
+    padding: 10px 20px;
+  }
+  
+  .feedback-management .btn {
+    margin-right: 10px;
+  }

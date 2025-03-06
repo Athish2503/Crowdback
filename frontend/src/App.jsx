@@ -8,6 +8,7 @@ import AuthoritiesDashboard from "./Components/AuthoritiesDashboard";
 import ReportIssue from "./Components/ReportIssue";
 import Welcome from "./Components/Welcome";
 import UserHome from "./Components/Publics/UserHome";
+import TicketStatus from "./Components/Publics/TicketStatus";
 
 
 const App = () => {
@@ -33,11 +34,12 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/authorities-login" element={<AuthoritiesLogin />} />
-        <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
-        <Route path="/authorities-dashboard" element={isAuthoritiesAuthenticated ? <AuthoritiesDashboard /> : <Navigate to="/" />} />
-        <Route path="/report-issue" element={isAuthenticated ? <ReportIssue /> : <Navigate to="/" />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/authorities-dashboard" element={<AuthoritiesDashboard />} />
+        <Route path="/report-issue" element={<ReportIssue/>} />
         {/* <Route path="/user-home" element={isAuthenticated ? <UserHome /> : <Navigate to="/" />} /> */}
         <Route path="/user-home" element={<UserHome />} />
+        <Route path="/my-ticket-status" element={<TicketStatus/>} />
       </Routes>
     </Router>
   );
