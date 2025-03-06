@@ -9,6 +9,7 @@ import ReportIssue from "./Components/ReportIssue";
 import Welcome from "./Components/Welcome";
 import UserHome from "./Components/Publics/UserHome";
 import TicketStatus from "./Components/Publics/TicketStatus";
+import UserProfile from "./Components/Publics/UserProfile";
 
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
         {/* <Route path="/user-home" element={isAuthenticated ? <UserHome /> : <Navigate to="/" />} /> */}
         <Route path="/user-home" element={<UserHome />} />
         <Route path="/my-ticket-status" element={<TicketStatus/>} />
+        <Route path="/user-profile" element={<UserProfile />} />
       </Routes>
     </Router>
   );

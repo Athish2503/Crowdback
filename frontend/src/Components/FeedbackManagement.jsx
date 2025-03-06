@@ -54,7 +54,38 @@ const FeedbackManagement = () => {
     setEmailData({
       email: feedback.email,
       subject: `Regarding your feedback: ${feedback.title}`,
-      message: `Dear ${feedback.reporter},\n\nWe have received your feedback regarding "${feedback.title}".\n\nFeedback Details:\n- Type: ${feedback.type}\n- Status: ${feedback.status}\n- Description: ${feedback.description}\n- Date: ${new Date(feedback.date).toLocaleDateString()}\n\nThank you for your input.\n\nBest regards,\nYour Team`
+      message: `<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { margin: 20px; }
+    .header { font-size: 18px; font-weight: bold; }
+    .details { margin-top: 10px; }
+    .details p { margin: 5px 0; }
+    .footer { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>Dear ${feedback.reporter},</p>
+    <p>We have received your feedback regarding "<strong>${feedback.title}</strong>".</p>
+    <div class="details">
+      <p><strong>Feedback Details:</strong></p>
+      <p>Ticket ID: ${feedback._id}</p>
+      <p>Type: ${feedback.type}</p>
+      <p>Status: ${feedback.status}</p>
+      <p>Description: ${feedback.description}</p>
+      <p>Date: ${new Date(feedback.date).toLocaleDateString()}</p>
+    </div>
+    <p>Thank you for your valuable input. We will review your feedback and take the necessary actions.</p>
+    <div class="footer">
+      <p>Best regards,</p>
+      <p>Your Team</p>
+    </div>
+  </div>
+</body>
+</html>`
     });
     setShowEmailModal(true);
   };

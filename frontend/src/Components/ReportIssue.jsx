@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "./Publics/Sidebar";
+import Confetti from "react-confetti";
 
 export default function ReportIssue() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,8 @@ export default function ReportIssue() {
     type: "suggestion",
     email: "",
   });
+
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const navigate = useNavigate();
 
@@ -50,7 +53,19 @@ export default function ReportIssue() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Issue reported successfully!");
-      setTimeout(() => navigate("/user-home"), 2000);
+
+      // Add points to user profile
+      await axios.post("http://localhost:5000/api/add-points", {}, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+
+      toast.success("Points added to your account!");
+      setShowConfetti(true);
+
+      setTimeout(() => {
+        setShowConfetti(false);
+        navigate("/user-home");
+      }, 5000);
     } catch {
       toast.error("Failed to report issue. Please try again.");
     }
@@ -64,6 +79,7 @@ export default function ReportIssue() {
 
   return (
     <div className="d-flex min-vh-100 bg-light">
+      {showConfetti && <Confetti />}
       <Sidebar handleLogout={handleLogout} />
       <Container fluid className="flex-grow-1 d-flex justify-content-center align-items-center">
         <Card className="p-4 shadow-lg w-100" style={{ maxWidth: "600px", borderRadius: "12px" }}>

@@ -1,3 +1,4 @@
+import { User } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { HouseDoor, PlusCircle, Ticket, BoxArrowRight, List } from "react-bootstrap-icons";
@@ -25,9 +26,11 @@ const Sidebar = ({ handleLogout }) => {
   const handleShow = () => setShow(true);
 
   const menuItems = [
+    {icon: <User className="me-2" />, text: "User Profile", route: "/user-profile"},
     { icon: <HouseDoor className="me-2" />, text: "Home", route: "/user-home" },
     { icon: <PlusCircle className="me-2" />, text: "Report Issue", route: "/report-issue" },
     { icon: <Ticket className="me-2" />, text: "My Ticket Status", route: "/my-ticket-status" },
+    
   ];
 
   const handleNavigation = (route) => {

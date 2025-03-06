@@ -43,6 +43,10 @@ const feedbackSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  pointsAllocated: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);
