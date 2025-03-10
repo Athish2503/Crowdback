@@ -3,14 +3,16 @@ import { useState, useEffect } from "react";
 import Login from "./Components/Authentication/LoginPage";
 import Register from "./Components/Authentication/Register";
 import AuthoritiesLogin from "./Components/Authentication/AuthoritiesLogin";
-import Dashboard from "./Components/Dashboard";
-import AuthoritiesDashboard from "./Components/AuthoritiesDashboard";
-import ReportIssue from "./Components/ReportIssue";
+import Dashboard from "./Components/Publics/Dashboard";
+import AuthoritiesDashboard from "./Components/Authorities/AuthoritiesDashboard";
+import FeedbackManagement from "./Components/Authorities/FeedbackManagement"; // Import FeedbackManagement
+import ReportIssue from "./Components/Publics/ReportIssue";
 import Welcome from "./Components/Welcome";
 import UserHome from "./Components/Publics/UserHome";
 import TicketStatus from "./Components/Publics/TicketStatus";
 import UserProfile from "./Components/Publics/UserProfile";
-
+import EventCalendar from "./Components/Authorities/EventCalendar";
+import UserEvents from "./Components/Publics/UserEvents";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -37,11 +39,13 @@ const App = () => {
         <Route path="/authorities-login" element={<AuthoritiesLogin />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/authorities-dashboard" element={<AuthoritiesDashboard />} />
-        <Route path="/report-issue" element={<ReportIssue/>} />
-        {/* <Route path="/user-home" element={isAuthenticated ? <UserHome /> : <Navigate to="/" />} /> */}
+        <Route path="/feedback" element={<FeedbackManagement />} /> {/* Add FeedbackManagement route */}
+        <Route path="/report-issue" element={<ReportIssue />} />
         <Route path="/user-home" element={<UserHome />} />
-        <Route path="/my-ticket-status" element={<TicketStatus/>} />
+        <Route path="/my-ticket-status" element={<TicketStatus />} />
         <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/event-calendar" element={<EventCalendar />} />
+        <Route path="/user-events" element={<UserEvents />} />
       </Routes>
     </Router>
   );

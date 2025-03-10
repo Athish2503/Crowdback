@@ -3,7 +3,7 @@ import { Card, Badge, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
-import Sidebar from './Publics/Sidebar';
+import Sidebar from './Sidebar';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Dashboard() {

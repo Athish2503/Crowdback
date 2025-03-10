@@ -37,7 +37,8 @@ const addPoints = async (req, res) => {
   try {
     const userId = req.user.id; // Assuming you have user ID in the request object
     const user = await User.findById(userId);
-
+    console.log(user);
+    
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Nav } from "react-bootstrap";
-import { BarChart3, MessageSquare, Clock, Users, Settings, LogOut, Menu } from "lucide-react";
+import { BarChart3, MessageSquare, Calendar, Users, Settings, LogOut, Menu } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const AuthoritiesSidebar = ({ activeTab, setActiveTab, handleLogout }) => {
@@ -34,9 +34,9 @@ const AuthoritiesSidebar = ({ activeTab, setActiveTab, handleLogout }) => {
         {/* Navigation Links */}
         <Nav className="flex flex-col flex-grow p-4">
           {[
-            { key: "overview", label: "Overview", icon: BarChart3 },
+            { key: "authorities-dashboard", label: "Overview", icon: BarChart3 }, // Update key to match route
             { key: "feedback", label: "Feedback Management", icon: MessageSquare },
-            { key: "realtime", label: "Real-time Reports", icon: Clock },
+            { key: "event-calendar", label: "Event Calendar", icon: Calendar },
             { key: "users", label: "User Management", icon: Users },
           ].map(({ key, label, icon: Icon }) => (
             <Nav.Link
@@ -49,6 +49,7 @@ const AuthoritiesSidebar = ({ activeTab, setActiveTab, handleLogout }) => {
               onClick={() => {
                 setActiveTab(key);
                 setIsOpen(false); // Close menu on selection
+                navigate(`/${key}`);
               }}
             >
               <Icon size={22} />
@@ -85,4 +86,4 @@ const AuthoritiesSidebar = ({ activeTab, setActiveTab, handleLogout }) => {
   );
 };
 
-export default AuthoritiesSidebar
+export default AuthoritiesSidebar;
