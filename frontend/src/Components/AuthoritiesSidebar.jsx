@@ -36,13 +36,14 @@ const AuthoritiesSidebar = ({ activeTab, setActiveTab, handleLogout }) => {
           {[
             { key: "overview", label: "Overview", icon: BarChart3 },
             { key: "feedback", label: "Feedback Management", icon: MessageSquare },
-            { key: "realtime", label: "Real-time Reports", icon: Clock },
+            { key: "realtime", label: "Event Calender", icon: Clock },
             { key: "users", label: "User Management", icon: Users },
           ].map(({ key, label, icon: Icon }) => (
             <Nav.Link
               key={key}
               className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-300 font-medium ${
                 activeTab === key
+                
                   ? "bg-blue-600 text-black shadow-md"
                   : "text-gray-700 hover:bg-gray-100 hover:shadow-sm"
               }`}
