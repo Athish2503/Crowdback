@@ -263,7 +263,7 @@ const UserProfile = () => {
                   <Form.Group>
                     <Form.Label className="font-medium text-gray-700">Points to Redeem</Form.Label>
                     <Form.Control
-                      type="number"
+                      type="input"
                       value={pointsToRedeem}
                       onChange={(e) => setPointsToRedeem(parseInt(e.target.value) || 0)}
                       min="0"

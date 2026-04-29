@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import Confetti from "react-confetti";
-import Sidebar from "./Publics/Sidebar";
+import Sidebar from "./Sidebar";
 
 export default function ReportIssue() {
   const [formData, setFormData] = useState({
@@ -97,6 +97,7 @@ export default function ReportIssue() {
                 <option value="suggestion">Suggestion</option>
                 <option value="feedback">Feedback</option>
                 <option value="issue">Issue</option>
+                <option value="complaint">Complaint</option>
               </Form.Select>
             </Col>
             <Col md={6} className="mb-3">
